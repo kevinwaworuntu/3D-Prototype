@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Resources/Scene/AudioSettings.unity
+    guid: 76efcc32cb78a284e97696f5983a00ae
+  - enabled: 0
+    path: Assets/Resources/Scene/VideoSettings.unity
+    guid: adb66cafbabb78d4ebf4e866abe3e231
+  m_configObjects: {}
