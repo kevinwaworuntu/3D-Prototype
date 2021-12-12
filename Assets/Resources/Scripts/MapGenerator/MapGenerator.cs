@@ -43,12 +43,12 @@ public class MapGenerator : MonoBehaviour
                     case MapStatus.none:
                         break;
                     case MapStatus.generateMap:
-                        mapDataLoader.listObject[i].SetActive(true);
-                        mapDataLoader.listObject[i].GetComponent<NavMeshSurface>().BuildNavMesh();
+                        mapDataLoader.groundList[i].SetActive(true);
+                        mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
                         break;
                     case MapStatus.generateMapPlusCoin:
-                        mapDataLoader.listObject[i].SetActive(true);
-                        mapDataLoader.listObject[i].GetComponent<NavMeshSurface>().BuildNavMesh();
+                        mapDataLoader.groundList[i].SetActive(true);
+                        mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
                         mapDataLoader.collectibleList[i].SetActive(true);
                         break;
                 }
@@ -59,7 +59,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int i = 0; i < mapDataLoader.mapDataSO.mapDataContainer.Count; i++)
             {
-                mapDataLoader.listObject[i].SetActive(false);
+                mapDataLoader.groundList[i].SetActive(false);
             }
         }
     }
@@ -69,16 +69,16 @@ public class MapGenerator : MonoBehaviour
     {
         if (visible)
         {
-            for (int i = 0; i < mapDataLoader.listObject.Count; i++)
+            for (int i = 0; i < mapDataLoader.groundList.Count; i++)
             {
-                mapDataLoader.listObject[i].SetActive(true);
+                mapDataLoader.groundList[i].SetActive(true);
             }
         }
         else
         {
-            for (int i = 0; i < mapDataLoader.listObject.Count; i++)
+            for (int i = 0; i < mapDataLoader.groundList.Count; i++)
             {
-                mapDataLoader.listObject[i].SetActive(false);
+                mapDataLoader.groundList[i].SetActive(false);
                 mapDataLoader.collectibleList[i].SetActive(false);
             }
         }

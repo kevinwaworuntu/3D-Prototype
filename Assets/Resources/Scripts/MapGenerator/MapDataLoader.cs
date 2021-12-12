@@ -5,23 +5,25 @@ using UnityEngine;
 public class MapDataLoader : MonoBehaviour
 {
     [Header("SPAWN OBJECT")]
-    public GameObject objectToSpawn;
-    public GameObject collectiblePrefabs;
+    public GameObject groundToSpawn;
+    public GameObject collectibleToSpawn;
 
     [Space]
     [Header("SPAWN POSITION")]
-    public Transform[] spawnPosition;
+    [SerializeField] private float spawnStartPosX = 0.5f;
+    [SerializeField] private float spawnStartPosZ = 0.5f;
     [SerializeField] private float collectibleHeight;
 
     [Space]
     [Header("GAME OBJECT LIST")]
-    public List<GameObject> listObject = new List<GameObject>();
+    [SerializeField] private int matrixSize;
+    public List<GameObject> groundList = new List<GameObject>();
     public List<GameObject> collectibleList = new List<GameObject>();
 
     [Header("MAP DATA")]
     public MapDataSO mapDataSO;
     public int currentLevel;
-
+ 
     private void Awake()
     {
         GenerateObjectPool();
@@ -30,15 +32,24 @@ public class MapDataLoader : MonoBehaviour
     #region Create Pool
     private void GenerateObjectPool()
     {
-        for (int i = 0; i < spawnPosition.Length; i++)
+        for (int i = 0; i < matrixSize; i++)
         {
-            listObject.Add(Instantiate(objectToSpawn, spawnPosition[i]));
-            listObject[i].SetActive(false);
-            collectibleList.Add(Instantiate(collectiblePrefabs, spawnPosition[i]));
-            collectibleList[i].transform.position = new Vector3(spawnPosition[i].position.x, spawnPosition[i].position.y + collectibleHeight, spawnPosition[i].position.z);
-            collectibleList[i].SetActive(false);
-        }
-    }
+            for (int j = 0; j < matrixSize; j++)
+            {
+                groundList.Add(Instantiate<GameObject>(groundToSpawn, new Vector3(spawnStartPosX, 0, spawnStartPosZ), Quaternion.identity, transform));
+                groundList[(matrixSize * i) + j].name = $"Ground_{(matrixSize * i) + j}";
+                groundList[(matrixSize * i) + j].SetActive(false);
+                
+                collectibleList.Add(Instantiate<GameObject>(collectibleToSpawn, new Vector3(spawnStartPosX, collectibleHeight, spawnStartPosZ), Quaternion.identity, groundList[(matrixSize * i) + j].transform));
+                collectibleList[(matrixSize * i) + j].name = $"Collectible_{(matrixSize * i) + j}";
+                collectibleList[(matrixSize * i) + j].SetActive(false);
+                
+                spawnStartPosX += 1;
+            }
+            spawnStartPosX = 0.5f;
+            spawnStartPosZ -= 1;
+        } 
+    }   
     #endregion
     [ContextMenu("Load Map Data")]
     public void CurrentMapData()
