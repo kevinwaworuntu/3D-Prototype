@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f896031ac3d61346bd921018d5710d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapDataLoader: {fileID: 0}
+  mapDataLoader: {fileID: 8898517326539766053}
+  isFromMapLoader: 1
 --- !u!114 &8898517326539766053
 MonoBehaviour:
   m_ObjectHideFlags: 0

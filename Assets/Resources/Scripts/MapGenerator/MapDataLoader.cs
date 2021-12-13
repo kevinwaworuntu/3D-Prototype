@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,15 +7,17 @@ public class MapDataLoader : MonoBehaviour
     public GameObject groundToSpawn;
     public GameObject collectibleToSpawn;
 
-    [Space]
     [Header("SPAWN POSITION")]
+    private float posXInitialValue;
+    private float posZInitialValue;
+    private float posXIncrementValue = 1;
+    private float posZIncrementValue = 1;
     [SerializeField] private float spawnStartPosX = 0.5f;
     [SerializeField] private float spawnStartPosZ = 0.5f;
     [SerializeField] private float collectibleHeight;
 
-    [Space]
     [Header("GAME OBJECT LIST")]
-    [SerializeField] private int matrixSize;
+    public int matrixSize;
     public List<GameObject> groundList = new List<GameObject>();
     public List<GameObject> collectibleList = new List<GameObject>();
 
@@ -26,7 +27,9 @@ public class MapDataLoader : MonoBehaviour
  
     private void Awake()
     {
-        GenerateObjectPool();
+        posXInitialValue = spawnStartPosX;
+        posZInitialValue = spawnStartPosZ;
+        GenerateObjectPool();  
     }
 
     #region Create Pool
@@ -44,11 +47,12 @@ public class MapDataLoader : MonoBehaviour
                 collectibleList[(matrixSize * i) + j].name = $"Collectible_{(matrixSize * i) + j}";
                 collectibleList[(matrixSize * i) + j].SetActive(false);
                 
-                spawnStartPosX += 1;
+                spawnStartPosX += posXIncrementValue;
             }
-            spawnStartPosX = 0.5f;
-            spawnStartPosZ -= 1;
-        } 
+            spawnStartPosX = posXInitialValue;
+            spawnStartPosZ -= posZIncrementValue;
+        }
+        spawnStartPosZ = posZInitialValue;
     }   
     #endregion
     [ContextMenu("Load Map Data")]
