@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Resources/Scene/AudioSettings.unity
-    guid: 76efcc32cb78a284e97696f5983a00ae
-  - enabled: 0
-    path: Assets/Resources/Scene/VideoSettings.unity
-    guid: adb66cafbabb78d4ebf4e866abe3e231
+    path: Assets/Resources/Scene/MapGenerator.unity
+    guid: 6b4a6114809d7c749b309bf9dae52f5a
+  - enabled: 1
+    path: Assets/Resources/Scene/MapMaker.unity
+    guid: e4e77b40b15dda4428369b0d2c0c44e9
   m_configObjects: {}

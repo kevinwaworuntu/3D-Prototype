@@ -3,13 +3,10 @@ using UnityEngine;
 
 public class MapMaker : MonoBehaviour
 {
-#if UNITY_EDITOR
-
-    [Header("MAP DATA LOADER")]
     private MapDataLoader mapDataLoader; 
 
     [Header("EMPTY MAP DATA")]
-    [Tooltip("Drag Map Data that will be Edited")]  public MapDataSO mapDataSO;
+    [Tooltip("Drag Map Data that will be Edited")] public MapDataSO mapDataSO;
 
     [Header("SPAWN TOGGLE OBJECT")]
     [SerializeField] private GameObject toggleToSpawn;
@@ -25,7 +22,6 @@ public class MapMaker : MonoBehaviour
     public List<GameObject> toggleList = new List<GameObject>();
     public List<MapGeneratorToggleStatus> toogleStatus = new List<MapGeneratorToggleStatus>();
 
-
     private void Awake()
     {
         mapDataLoader = GetComponent<MapDataLoader>();
@@ -33,7 +29,7 @@ public class MapMaker : MonoBehaviour
        
     }
 
-    #region Create Pool
+    #region CREATE POOL
     private void GenerateToggleObjectPool()
     {
         for (int i = 0; i < mapDataLoader.matrixSize; i++)
@@ -64,7 +60,6 @@ public class MapMaker : MonoBehaviour
     public void SaveData()
     {
         if (mapDataSO.mapDataContainer.Count != 0) mapDataSO.mapDataContainer.Clear(); 
-
         for (int i = 0; i < toogleStatus.Count; i++)
         {
             switch (toogleStatus[i].toggleStatus)
@@ -79,13 +74,6 @@ public class MapMaker : MonoBehaviour
                     mapDataSO.mapDataContainer.Add(MapStatus.generateMapPlusCoin);
                     break;
             }
-            #region ...
-            //if (i % so_MapData.matrixLenght == 0)
-            //{
-            //    //Move One Line Down
-            //    //This is Only Used for Making easier to read in JSON
-            //}
-            #endregion
         }
     }
     [ContextMenu("Import MapData from SO to UI")]
@@ -122,6 +110,4 @@ public class MapMaker : MonoBehaviour
             toogleStatus[i].GetComponent<MapGeneratorToggleStatus>().ToggleClickStatus();
         }
     }
-
-#endif
 }

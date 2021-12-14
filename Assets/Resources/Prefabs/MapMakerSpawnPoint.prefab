@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapDataLoader: {fileID: 0}
+  isFromMapLoader: 0
 --- !u!114 &7895118650758659162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,13 +59,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8054f9777826a64c891333f1a10dfa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toogleStatus: []
   mapDataSO: {fileID: 11400000, guid: e7170456c63ebe748b37947606724580, type: 2}
   toggleToSpawn: {fileID: 0}
   parentCanvas: {fileID: 0}
   spawnStartPosX: 0
   spawnStartPosY: 0
   toggleList: []
+  toogleStatus: []
 --- !u!114 &8064718344380191837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundToSpawn: {fileID: 0}
   collectibleToSpawn: {fileID: 0}
-  spawnStartPosX: 0.5
-  spawnStartPosZ: 0.5
+  posXInitialValue: 0.5
+  posZInitialValue: 0.5
   collectibleHeight: 1.5
   matrixSize: 0
   groundList: []

@@ -1567,6 +1567,10 @@ PrefabInstance:
       value: MapMakerSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 7895118650758659162, guid: 5933131185a8a3143b77f06247b83609, type: 3}
+      propertyPath: mapDataSO
+      value: 
+      objectReference: {fileID: 11400000, guid: b967c4a1cc2fe6d4798e40bb415d1ae9, type: 2}
+    - target: {fileID: 7895118650758659162, guid: 5933131185a8a3143b77f06247b83609, type: 3}
       propertyPath: parentCanvas
       value: 
       objectReference: {fileID: 153742653}
@@ -1576,7 +1580,7 @@ PrefabInstance:
       objectReference: {fileID: 1801274333328865285, guid: 6fc08e6cbf7971f429b035c23aaa5148, type: 3}
     - target: {fileID: 8064718344380191837, guid: 5933131185a8a3143b77f06247b83609, type: 3}
       propertyPath: matrixSize
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8064718344380191837, guid: 5933131185a8a3143b77f06247b83609, type: 3}
       propertyPath: groundToSpawn

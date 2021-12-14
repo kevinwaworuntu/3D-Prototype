@@ -48,10 +48,14 @@ public class MapGenerator : MonoBehaviour
                         break;
                     case MapStatus.generateMap:
                         mapDataLoader.groundList[i].SetActive(true);
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
                         mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
                         break;
                     case MapStatus.generateMapPlusCoin:
                         mapDataLoader.groundList[i].SetActive(true);
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
                         mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
                         mapDataLoader.collectibleList[i].SetActive(true);
                         break;
@@ -69,10 +73,14 @@ public class MapGenerator : MonoBehaviour
                         break;
                     case MapStatus.generateMap:
                         mapDataLoader.groundList[i].SetActive(true);
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
                         mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
                         break;
                     case MapStatus.generateMapPlusCoin:
                         mapDataLoader.groundList[i].SetActive(true);
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
+                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
                         mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
                         mapDataLoader.collectibleList[i].SetActive(true);
                         break;
@@ -93,10 +101,13 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
+
             for (int i = 0; i < mapDataLoader.groundList.Count; i++)
             {
                 mapDataLoader.groundList[i].SetActive(false);
                 mapDataLoader.collectibleList[i].SetActive(false);
+                mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
+                mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 1;
             }
         }
     }

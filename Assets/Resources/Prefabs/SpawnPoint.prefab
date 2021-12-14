@@ -60,11 +60,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundToSpawn: {fileID: 8227681937335525301, guid: 87ca8570cf8c4f3439d935215694558e, type: 3}
   collectibleToSpawn: {fileID: 8424560213638178004, guid: 76fd58909aa33f84292122a1e52bbd8a, type: 3}
-  spawnStartPosX: 0.5
-  spawnStartPosZ: 0.5
+  posXInitialValue: 0.5
+  posZInitialValue: 0.5
   collectibleHeight: 1.5
   matrixSize: 20
   groundList: []
   collectibleList: []
-  mapDataSO: {fileID: 11400000, guid: e7170456c63ebe748b37947606724580, type: 2}
+  mapDataSO: {fileID: 11400000, guid: 078fcdd24f15b4446874df8a6eb79596, type: 2}
   currentLevel: 2
