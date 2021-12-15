@@ -8,7 +8,9 @@ public class MapGenerator : MonoBehaviour
     private int matrixSize;
 
     [Header("MAP DATA REFERENCE")]
-    [SerializeField] private MapDataLoader mapDataLoader;
+    private MapDataLoader mapDataLoader;
+    private MapMaker mapMaker;
+
 
     [Header("GAMEPLAY SCENE OR DESIGN SCENE")]
     [SerializeField] private bool isDataFromMapLoader = true;
@@ -30,8 +32,17 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {
-        mapDataLoader = GetComponent<MapDataLoader>();
-        matrixSize = (int) Mathf.Sqrt(mapDataLoader.mapDataSO.mapDataContainer.Count);
+        if (isDataFromMapLoader)
+        {
+            mapDataLoader = GetComponent<MapDataLoader>();
+            matrixSize = (int)Mathf.Sqrt(mapDataLoader.mapDataSO.mapDataContainer.Count);
+        }
+        else
+        {
+            mapMaker = GetComponent<MapMaker>();
+            matrixSize = mapMaker.matrixSize;
+
+        }
     }
 
 
@@ -69,7 +80,7 @@ public class MapGenerator : MonoBehaviour
                             groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
                             groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
                             groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
-                            groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
 
                             collectibleList.Add(null);
                             break;
@@ -78,7 +89,7 @@ public class MapGenerator : MonoBehaviour
                             groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
                             groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
                             groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
-                            groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
 
                             collectibleList.Add(Instantiate<GameObject>(collectibleToSpawn, groundList[(matrixSize * i) + j].transform));
                             collectibleList[(matrixSize * i) + j].transform.localPosition = new Vector3(0, collectibleHeight, 0);
@@ -88,7 +99,32 @@ public class MapGenerator : MonoBehaviour
                 }
                 else
                 {
+                    switch (mapMaker.mapDataSO.mapDataContainer[(matrixSize * i) + j])
+                    {
+                        case MapStatus.none:
+                            groundList.Add(null);
+                            collectibleList.Add(null);
+                            break;
+                        case MapStatus.generateMap:
+                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
+                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
+                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
 
+                            collectibleList.Add(null);
+                            break;
+                        case MapStatus.generateMapPlusCoin:
+                            ;
+                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
+                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
+                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
+
+                            collectibleList.Add(Instantiate<GameObject>(collectibleToSpawn, groundList[(matrixSize * i) + j].transform));
+                            collectibleList[(matrixSize * i) + j].transform.localPosition = new Vector3(0, collectibleHeight, 0);
+                            collectibleList[(matrixSize * i) + j].name = $"Collectible_({j},{j})";
+                            break;
+                    }
                 }
                 spawnPosX += posXIncrementValue;
             }

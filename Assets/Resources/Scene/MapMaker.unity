@@ -296,7 +296,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &78251392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,6 +1562,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7895118650758659141, guid: 5933131185a8a3143b77f06247b83609, type: 3}
+      propertyPath: groundToSpawn
+      value: 
+      objectReference: {fileID: 8227681937335525301, guid: 87ca8570cf8c4f3439d935215694558e, type: 3}
+    - target: {fileID: 7895118650758659141, guid: 5933131185a8a3143b77f06247b83609, type: 3}
+      propertyPath: collectibleToSpawn
+      value: 
+      objectReference: {fileID: 8424560213638178004, guid: 76fd58909aa33f84292122a1e52bbd8a, type: 3}
     - target: {fileID: 7895118650758659143, guid: 5933131185a8a3143b77f06247b83609, type: 3}
       propertyPath: m_Name
       value: MapMakerSpawnPoint
@@ -1569,15 +1577,11 @@ PrefabInstance:
     - target: {fileID: 7895118650758659162, guid: 5933131185a8a3143b77f06247b83609, type: 3}
       propertyPath: mapDataSO
       value: 
-      objectReference: {fileID: 11400000, guid: b967c4a1cc2fe6d4798e40bb415d1ae9, type: 2}
+      objectReference: {fileID: 11400000, guid: e7170456c63ebe748b37947606724580, type: 2}
     - target: {fileID: 7895118650758659162, guid: 5933131185a8a3143b77f06247b83609, type: 3}
       propertyPath: parentCanvas
       value: 
       objectReference: {fileID: 153742653}
-    - target: {fileID: 7895118650758659162, guid: 5933131185a8a3143b77f06247b83609, type: 3}
-      propertyPath: toggleToSpawn
-      value: 
-      objectReference: {fileID: 1801274333328865285, guid: 6fc08e6cbf7971f429b035c23aaa5148, type: 3}
     - target: {fileID: 8064718344380191837, guid: 5933131185a8a3143b77f06247b83609, type: 3}
       propertyPath: matrixSize
       value: 10
@@ -1677,7 +1681,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 414629109}
         m_TargetAssemblyTypeName: MapGenerator, MapGenerator
-        m_MethodName: GenerateMapFromSO
+        m_MethodName: GenerateMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1686,7 +1690,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &740473308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2214,7 +2218,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &860167558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2937,7 +2941,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &988450270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4384,7 +4388,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1626032910
 MonoBehaviour:
   m_ObjectHideFlags: 0

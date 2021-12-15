@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public class MapMaker : MonoBehaviour
 {
     [Header("MATRIX SIZE")]
@@ -74,6 +74,7 @@ public class MapMaker : MonoBehaviour
                     break;
             }
         }
+        EditorUtility.SetDirty(mapDataSO);
     }
     [ContextMenu("Import MapData from SO to UI")]
     public void RefreshUIData()
@@ -109,4 +110,5 @@ public class MapMaker : MonoBehaviour
             toogleStatus[i].GetComponent<MapGeneratorToggleStatus>().ToggleClickStatus();
         }
     }
+
 }

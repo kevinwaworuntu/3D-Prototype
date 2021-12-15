@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7895118650758659143
+--- !u!1 &8721036315192447295
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7895118650758659140}
-  - component: {fileID: 7895118650758659141}
-  - component: {fileID: 7895118650758659162}
+  - component: {fileID: 8721036315192447292}
+  - component: {fileID: 8721036315192447293}
+  - component: {fileID: 8898517326539766053}
   m_Layer: 0
-  m_Name: MapMakerSpawnPoint
+  m_Name: SpawnPoint 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7895118650758659140
+--- !u!4 &8721036315192447292
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7895118650758659143}
+  m_GameObject: {fileID: 8721036315192447295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -10, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,41 +32,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7895118650758659141
+--- !u!114 &8721036315192447293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7895118650758659143}
+  m_GameObject: {fileID: 8721036315192447295}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f896031ac3d61346bd921018d5710d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapDataLoader: {fileID: 0}
-  isDataFromMapLoader: 0
-  groundToSpawn: {fileID: 0}
-  collectibleToSpawn: {fileID: 0}
+  isDataFromMapLoader: 1
+  groundToSpawn: {fileID: 8227681937335525301, guid: 87ca8570cf8c4f3439d935215694558e, type: 3}
+  collectibleToSpawn: {fileID: 8424560213638178004, guid: 76fd58909aa33f84292122a1e52bbd8a, type: 3}
   groundList: []
   collectibleList: []
---- !u!114 &7895118650758659162
+--- !u!114 &8898517326539766053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7895118650758659143}
+  m_GameObject: {fileID: 8721036315192447295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8054f9777826a64c891333f1a10dfa4, type: 3}
+  m_Script: {fileID: 11500000, guid: b27d72dc894752f4786ac646b7a40cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matrixSize: 10
-  mapDataSO: {fileID: 11400000, guid: e7170456c63ebe748b37947606724580, type: 2}
-  toggleToSpawn: {fileID: 1801274333328865285, guid: 6fc08e6cbf7971f429b035c23aaa5148, type: 3}
-  parentCanvas: {fileID: 0}
-  spawnStartPosX: 0
-  spawnStartPosY: 0
-  toggleList: []
-  toogleStatus: []
+  mapDataSO: {fileID: 11400000, guid: 5fc6007ba31107a49b91f05eaed208d2, type: 2}
+  currentLevel: 4

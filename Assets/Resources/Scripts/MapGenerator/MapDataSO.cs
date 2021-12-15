@@ -8,6 +8,7 @@ public enum MapStatus
     generateMapPlusCoin = 2
 };
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "MapData_",menuName ="ScriptableObject/Map Data")]
 public class MapDataSO : ScriptableObject
 {
