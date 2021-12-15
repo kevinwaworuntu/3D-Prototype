@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7895118650758659140}
   - component: {fileID: 7895118650758659141}
   - component: {fileID: 7895118650758659162}
-  - component: {fileID: 8064718344380191837}
   m_Layer: 0
   m_Name: MapMakerSpawnPoint
   m_TagString: Untagged
@@ -46,7 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapDataLoader: {fileID: 0}
-  isFromMapLoader: 0
+  isDataFromMapLoader: 1
+  groundToSpawn: {fileID: 0}
+  collectibleToSpawn: {fileID: 0}
+  groundList: []
+  collectibleList: []
 --- !u!114 &7895118650758659162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8054f9777826a64c891333f1a10dfa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matrixSize: 0
   mapDataSO: {fileID: 11400000, guid: e7170456c63ebe748b37947606724580, type: 2}
   toggleToSpawn: {fileID: 0}
   parentCanvas: {fileID: 0}
@@ -66,25 +70,3 @@ MonoBehaviour:
   spawnStartPosY: 0
   toggleList: []
   toogleStatus: []
---- !u!114 &8064718344380191837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7895118650758659143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27d72dc894752f4786ac646b7a40cbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundToSpawn: {fileID: 0}
-  collectibleToSpawn: {fileID: 0}
-  posXInitialValue: 0.5
-  posZInitialValue: 0.5
-  collectibleHeight: 1.5
-  matrixSize: 0
-  groundList: []
-  collectibleList: []
-  mapDataSO: {fileID: 0}
-  currentLevel: 1

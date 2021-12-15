@@ -1,115 +1,131 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(MapDataLoader))]
 public class MapGenerator : MonoBehaviour
 {
+    [Header("MATRIX SIZE")]
+    private int matrixSize;
+
     [Header("MAP DATA REFERENCE")]
     [SerializeField] private MapDataLoader mapDataLoader;
 
     [Header("GAMEPLAY SCENE OR DESIGN SCENE")]
-    [SerializeField] private bool isFromMapLoader = true;
+    [SerializeField] private bool isDataFromMapLoader = true;
+
+    [Header("SPAWN OBJECT")]
+    public GameObject groundToSpawn;
+    public GameObject collectibleToSpawn;
+
+    [Header("SPAWN POSITION")]
+    public readonly float posXInitialValue = 0f;
+    public readonly float posZInitialValue = 0f;
+    public readonly float collectibleHeight = 1.5f;
+    public readonly float posXIncrementValue = 1;
+    public readonly float posZIncrementValue = 1;
+
+    [Header("GAME OBJECT LIST")]
+    public List<GameObject> groundList = new List<GameObject>();
+    public List<GameObject> collectibleList = new List<GameObject>();
 
     private void Awake()
     {
         mapDataLoader = GetComponent<MapDataLoader>();
+        matrixSize = (int) Mathf.Sqrt(mapDataLoader.mapDataSO.mapDataContainer.Count);
     }
 
-    #region View All Tiles
-    [ContextMenu("View All Tiles")]
-    void ViewAllTiles()
-    {
-        ObjectFromPoolActiveStatus(true);
-    }
-    #endregion
 
     [ContextMenu("De-Generate Map")]
     public void DegenerateMap()
     {
-        ObjectFromPoolActiveStatus(false);
+        ClearMapListData();
     }
 
     [ContextMenu("Generate Map")]
-    public void GenerateMapFromSO()
+    public void GenerateMap()
     {
-        EnableObjectFromSO(isFromMapLoader);
+        CreateMapFromData(isDataFromMapLoader);
     }
 
-    #region Enable Object From SO
-    private void EnableObjectFromSO(bool isFromMapLoader)
+    #region CREATE MAP FROM DATA
+    private void CreateMapFromData(bool isDataFromMapLoader)
     {
-        if (isFromMapLoader)
+        float spawnPosX = posXInitialValue;
+        float spawnPosZ = posZInitialValue;
+
+        for (int i = 0; i < matrixSize; i++)
         {
-            for (int i = 0; i < mapDataLoader.mapDataSO.mapDataContainer.Count; i++)
+            for (int j = 0; j < matrixSize; j++)
             {
-                switch (mapDataLoader.mapDataSO.mapDataContainer[i])
+                if (isDataFromMapLoader)
                 {
-                    case MapStatus.none:
-                        break;
-                    case MapStatus.generateMap:
-                        mapDataLoader.groundList[i].SetActive(true);
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
-                        break;
-                    case MapStatus.generateMapPlusCoin:
-                        mapDataLoader.groundList[i].SetActive(true);
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
-                        mapDataLoader.collectibleList[i].SetActive(true);
-                        break;
+                    switch (mapDataLoader.mapDataSO.mapDataContainer[(matrixSize * i) + j])
+                    {
+                        case MapStatus.none:
+                            groundList.Add(null);
+                            collectibleList.Add(null);
+                            break;
+                        case MapStatus.generateMap:
+                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
+                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
+                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
+                            groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
+
+                            collectibleList.Add(null);
+                            break;
+                        case MapStatus.generateMapPlusCoin:
+                            ;
+                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
+                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
+                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
+                            groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
+
+                            collectibleList.Add(Instantiate<GameObject>(collectibleToSpawn, groundList[(matrixSize * i) + j].transform));
+                            collectibleList[(matrixSize * i) + j].transform.localPosition = new Vector3(0, collectibleHeight, 0);
+                            collectibleList[(matrixSize * i) + j].name = $"Collectible_({j},{j})";
+                            break;
+                    }
                 }
-            }
-        }
-        else
-        {
-            var mapMaker = GetComponent<MapMaker>();
-            for (int i = 0; i < mapMaker.mapDataSO.mapDataContainer.Count; i++)
-            {
-                switch (mapMaker.mapDataSO.mapDataContainer[i])
+                else
                 {
-                    case MapStatus.none:
-                        break;
-                    case MapStatus.generateMap:
-                        mapDataLoader.groundList[i].SetActive(true);
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
-                        break;
-                    case MapStatus.generateMapPlusCoin:
-                        mapDataLoader.groundList[i].SetActive(true);
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 0;
-                        mapDataLoader.groundList[i].GetComponent<NavMeshSurface>().BuildNavMesh();
-                        mapDataLoader.collectibleList[i].SetActive(true);
-                        break;
+
                 }
+                spawnPosX += posXIncrementValue;
             }
+            spawnPosX = posXInitialValue;
+            spawnPosZ -= posZIncrementValue;
         }
+        spawnPosX = posZInitialValue;
     }
     #endregion
-    #region Enable Object From Pool
-    private void ObjectFromPoolActiveStatus(bool visible)
+    #region CLEAR MAP FROM LIST
+    private void ClearGroundList()
     {
-        if (visible)
+        foreach (GameObject ground in groundList)
         {
-            for (int i = 0; i < mapDataLoader.groundList.Count; i++)
-            {
-                mapDataLoader.groundList[i].SetActive(true);
-            }
+            if (Application.isEditor) DestroyImmediate(ground);
+            else Destroy(ground);
         }
-        else
-        {
 
-            for (int i = 0; i < mapDataLoader.groundList.Count; i++)
-            {
-                mapDataLoader.groundList[i].SetActive(false);
-                mapDataLoader.collectibleList[i].SetActive(false);
-                mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().overrideArea = true;
-                mapDataLoader.groundList[i].GetComponent<NavMeshModifier>().area = 1;
-            }
+        groundList.Clear();
+    }
+
+    private void ClearCollectibleList()
+    {
+        foreach (GameObject collectible in collectibleList)
+        {
+            if (Application.isEditor) DestroyImmediate(collectible);
+            else Destroy(collectible);
         }
+
+        collectibleList.Clear();
+    }
+
+    public void ClearMapListData()
+    {
+        ClearGroundList();
+        ClearCollectibleList();
     }
     #endregion
 }
+

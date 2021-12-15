@@ -10,7 +10,7 @@ public class MapGeneratorCustomInspector : Editor
         MapGenerator mapGenerator = (MapGenerator)target;
         if(GUILayout.Button("Generate Map"))
         {
-            mapGenerator.GenerateMapFromSO();
+            mapGenerator.GenerateMap();
         }
 
     }

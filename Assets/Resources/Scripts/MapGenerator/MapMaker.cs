@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class MapMaker : MonoBehaviour
 {
-    private MapDataLoader mapDataLoader; 
+    [Header("MATRIX SIZE")]
+    public int matrixSize;
 
     [Header("EMPTY MAP DATA")]
     [Tooltip("Drag Map Data that will be Edited")] public MapDataSO mapDataSO;
@@ -24,21 +25,19 @@ public class MapMaker : MonoBehaviour
 
     private void Awake()
     {
-        mapDataLoader = GetComponent<MapDataLoader>();
         GenerateToggleObjectPool();
-       
     }
 
     #region CREATE POOL
     private void GenerateToggleObjectPool()
     {
-        for (int i = 0; i < mapDataLoader.matrixSize; i++)
+        for (int i = 0; i < matrixSize; i++)
         {
-            for (int j = 0; j < mapDataLoader.matrixSize; j++)
+            for (int j = 0; j < matrixSize; j++)
             {
                 toggleList.Add(Instantiate<GameObject>(toggleToSpawn, parentCanvas));
-                toggleList[(mapDataLoader.matrixSize * i) + j].GetComponent<RectTransform>().localPosition = new Vector3(spawnStartPosX, spawnStartPosY);
-                toggleList[(mapDataLoader.matrixSize * i) + j].name = $"Toggle_{(mapDataLoader.matrixSize * i) + j}";
+                toggleList[(matrixSize * i) + j].GetComponent<RectTransform>().localPosition = new Vector3(spawnStartPosX, spawnStartPosY);
+                toggleList[(matrixSize * i) + j].name = $"Toggle_{(matrixSize * i) + j}";
                 spawnStartPosX += posXIncrementValue;
             }
             spawnStartPosX = 0;
