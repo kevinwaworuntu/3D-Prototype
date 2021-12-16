@@ -27,10 +27,10 @@ public class NewBehaviourScript : MonoBehaviour
         // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
         // a sceneBuildIndex of 1 as shown in Build Settings.
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
 
         // Wait until the asynchronous scene fully loads
-        while (asyncLoad.isDone)
+        while (!asyncLoad.isDone)
         {
             yield return null;
         }
@@ -45,7 +45,7 @@ public class NewBehaviourScript : MonoBehaviour
         AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
 
         // Wait until the asynchronous scene fully loads
-        while (asyncLoad.isDone)
+        while (!asyncLoad.isDone)
         {
             yield return null;
         }

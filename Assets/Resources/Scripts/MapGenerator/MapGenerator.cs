@@ -41,10 +41,8 @@ public class MapGenerator : MonoBehaviour
         {
             mapMaker = GetComponent<MapMaker>();
             matrixSize = mapMaker.matrixSize;
-
         }
     }
-
 
     [ContextMenu("De-Generate Map")]
     public void DegenerateMap()
@@ -55,15 +53,39 @@ public class MapGenerator : MonoBehaviour
     [ContextMenu("Generate Map")]
     public void GenerateMap()
     {
+        CreatePool();
         CreateMapFromData(isDataFromMapLoader);
     }
 
-    #region CREATE MAP FROM DATA
-    private void CreateMapFromData(bool isDataFromMapLoader)
+    private void CreatePool()
     {
         float spawnPosX = posXInitialValue;
         float spawnPosZ = posZInitialValue;
 
+        for (int i = 0; i < matrixSize; i++)
+        {
+            for (int j = 0; j < matrixSize; j++)
+            {
+                groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
+                    groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
+                    groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
+                    groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
+                    groundList[(matrixSize * i) + j].SetActive(false);
+
+                    collectibleList.Add(Instantiate<GameObject>(collectibleToSpawn, groundList[(matrixSize * i) + j].transform));
+                    collectibleList[(matrixSize * i) + j].transform.localPosition = new Vector3(0, collectibleHeight, 0);
+                    collectibleList[(matrixSize * i) + j].name = $"Collectible_({j},{j})";
+                    groundList[(matrixSize * i) + j].SetActive(false);
+                spawnPosX += posXIncrementValue;
+            }
+            spawnPosX = posXInitialValue;
+            spawnPosZ -= posZIncrementValue;
+        }
+        spawnPosX = posZInitialValue;
+    }
+    #region CREATE MAP FROM DATA
+    private void CreateMapFromData(bool isDataFromMapLoader)
+    {
         for (int i = 0; i < matrixSize; i++)
         {
             for (int j = 0; j < matrixSize; j++)
@@ -73,27 +95,20 @@ public class MapGenerator : MonoBehaviour
                     switch (mapDataLoader.mapDataSO.mapDataContainer[(matrixSize * i) + j])
                     {
                         case MapStatus.none:
-                            groundList.Add(null);
-                            collectibleList.Add(null);
+                            groundList[(matrixSize * i) + j].SetActive(false);
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().overrideArea = true;
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().area = 1;
+                            collectibleList[(matrixSize * i) + j].SetActive(false);
                             break;
                         case MapStatus.generateMap:
-                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
-                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
-                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
-                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
-
-                            collectibleList.Add(null);
+                            groundList[(matrixSize * i) + j].SetActive(true);
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().overrideArea = false;
+                            collectibleList[(matrixSize * i) + j].SetActive(false);
                             break;
                         case MapStatus.generateMapPlusCoin:
-                            ;
-                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
-                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
-                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
-                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
-
-                            collectibleList.Add(Instantiate<GameObject>(collectibleToSpawn, groundList[(matrixSize * i) + j].transform));
-                            collectibleList[(matrixSize * i) + j].transform.localPosition = new Vector3(0, collectibleHeight, 0);
-                            collectibleList[(matrixSize * i) + j].name = $"Collectible_({j},{j})";
+                            groundList[(matrixSize * i) + j].SetActive(true);
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().overrideArea = false;
+                            collectibleList[(matrixSize * i) + j].SetActive(true);
                             break;
                     }
                 }
@@ -102,36 +117,25 @@ public class MapGenerator : MonoBehaviour
                     switch (mapMaker.mapDataSO.mapDataContainer[(matrixSize * i) + j])
                     {
                         case MapStatus.none:
-                            groundList.Add(null);
-                            collectibleList.Add(null);
+                            groundList[(matrixSize * i) + j].SetActive(false);
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().overrideArea = true;
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().area = 1;
+                            collectibleList[(matrixSize * i) + j].SetActive(false);
                             break;
                         case MapStatus.generateMap:
-                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
-                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
-                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
-                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
-
-                            collectibleList.Add(null);
+                            groundList[(matrixSize * i) + j].SetActive(true);
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().overrideArea = false;
+                            collectibleList[(matrixSize * i) + j].SetActive(false);
                             break;
                         case MapStatus.generateMapPlusCoin:
-                            ;
-                            groundList.Add(Instantiate<GameObject>(groundToSpawn, transform));
-                            groundList[(matrixSize * i) + j].transform.localPosition = new Vector3(spawnPosX, 0, spawnPosZ);
-                            groundList[(matrixSize * i) + j].name = $"Ground_({i},{j})";
-                            groundList[(matrixSize * i) + j].GetComponent<NavMeshSurface>().BuildNavMesh();
-
-                            collectibleList.Add(Instantiate<GameObject>(collectibleToSpawn, groundList[(matrixSize * i) + j].transform));
-                            collectibleList[(matrixSize * i) + j].transform.localPosition = new Vector3(0, collectibleHeight, 0);
-                            collectibleList[(matrixSize * i) + j].name = $"Collectible_({j},{j})";
+                            groundList[(matrixSize * i) + j].SetActive(true);
+                            groundList[(matrixSize * i) + j].GetComponent<NavMeshModifier>().overrideArea = false;
+                            collectibleList[(matrixSize * i) + j].SetActive(true);
                             break;
                     }
                 }
-                spawnPosX += posXIncrementValue;
             }
-            spawnPosX = posXInitialValue;
-            spawnPosZ -= posZIncrementValue;
         }
-        spawnPosX = posZInitialValue;
     }
     #endregion
     #region CLEAR MAP FROM LIST

@@ -12,6 +12,5 @@ public class MapGeneratorCustomInspector : Editor
         {
             mapGenerator.GenerateMap();
         }
-
     }
 }

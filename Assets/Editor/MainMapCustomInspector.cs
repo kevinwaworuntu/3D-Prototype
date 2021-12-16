@@ -12,6 +12,9 @@ public class MainMapCustomInspector : Editor
         {
             mainMapManager.GenerateMainMap();
         }
-
+        else if (GUILayout.Button("Generate All Map Data"))
+        {
+            mainMapManager.GenerateAllMapData();
+        }
     }
 }
