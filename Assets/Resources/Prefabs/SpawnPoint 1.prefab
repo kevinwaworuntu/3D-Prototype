@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDataFromMapLoader: 1
+  emptyGameObject: {fileID: 3692473818231784560, guid: ba8021c84c789ba4bbeecfaef1eb4536, type: 3}
   groundToSpawn: {fileID: 8227681937335525301, guid: 87ca8570cf8c4f3439d935215694558e, type: 3}
   collectibleToSpawn: {fileID: 8424560213638178004, guid: 76fd58909aa33f84292122a1e52bbd8a, type: 3}
   groundList: []

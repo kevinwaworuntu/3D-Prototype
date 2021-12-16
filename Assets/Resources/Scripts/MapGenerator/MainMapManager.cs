@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MainMapManager : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class MainMapManager : MonoBehaviour
 
     [Header("MAP DATA TO SPAWN")]
     [SerializeField] private GameObject[] mapDataToSpawn;
-    [SerializeField] private GameObject[] mapDataParent;
 
 
     #region GENERATE BRIDGE
@@ -37,23 +37,35 @@ public class MainMapManager : MonoBehaviour
                 {
                     if (i == matrixMiddleIndex - 8 || j == matrixMiddleIndex - 8)
                     {
-                        bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
-                        bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //if (mapDataToSpawn.Length >= 1)
+                        //{
+                            bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
+                            bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //}
                     }
                     else if (i == matrixMiddleIndex - 3 || j == matrixMiddleIndex - 3)
                     {
-                        bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
-                        bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //if (mapDataToSpawn.Length >= 2)
+                        //{
+                            bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
+                            bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //}
                     }
-                    else if(i == matrixMiddleIndex + 3 || j == matrixMiddleIndex + 3)
+                    else if (i == matrixMiddleIndex + 3 || j == matrixMiddleIndex + 3)
                     {
-                        bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
-                        bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //if (mapDataToSpawn.Length >= 3)
+                        //{
+                            bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
+                            bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //}
                     }
                     else if (i == matrixMiddleIndex + 8 || j == matrixMiddleIndex + 8)
                     {
-                        bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
-                        bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //if (mapDataToSpawn.Length >= 4) 
+                        //{
+                            bridgeList.Add(Instantiate<GameObject>(bridgeToSpawn, new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform));
+                            bridgeList[(matrixSize * i) + j].name = $"bridge_({i},{j})";
+                        //}
                     }
                     else
                     {
@@ -86,35 +98,43 @@ public class MainMapManager : MonoBehaviour
             {
                 if (i == 0 && j == 0)
                 {
-                    bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, mapDataParent[k].transform);
-                    bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
-                    mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent <MapGenerator>());
-                    k++;
-                    //bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>().GenerateMap();
+                    if (mapDataToSpawn.Length >= 1)
+                    {
+                        bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform);
+                        bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
+                        mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>());
+                        k++;
+                    }
                 }
                 else if (i == 0 && j == ((matrixSize / 2) + 1))
                 {
-                    bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, mapDataParent[k].transform);
-                    bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
-                    mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>());
-                    k++;
-                    //bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>().GenerateMap();
+                    if (mapDataToSpawn.Length >= 2)
+                    {
+                        bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform);
+                        bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
+                        mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>());
+                        k++;
+                    }
                 }
                 else if (i == ((matrixSize / 2) + 1) && j == 0)
                 {
-                    bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, mapDataParent[k].transform);
-                    bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
-                    mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>());
-                    k++;
-                    //bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>().GenerateMap();
+                    if (mapDataToSpawn.Length >= 3)
+                    {
+                        bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform);
+                        bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
+                        mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>());
+                        k++;
+                    }
                 }
                 else if (i == ((matrixSize / 2) + 1) && j == ((matrixSize / 2) + 1))
                 {
-                    bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, mapDataParent[k].transform);
-                    bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
-                    mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>());
-                    k++;
-                    //bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>().GenerateMap();
+                    if (mapDataToSpawn.Length >= 4)
+                    {
+                        bridgeList[(matrixSize * i) + j] = Instantiate<GameObject>(mapDataToSpawn[k], new Vector3(spawnPosX, 0, spawnPosZ), Quaternion.identity, transform);
+                        bridgeList[(matrixSize * i) + j].name = $"MapData_({i},{j})";
+                        mapGeneratorList.Add(bridgeList[(matrixSize * i) + j].GetComponent<MapGenerator>());
+                        k++;
+                    }
                 }
                 spawnPosX += posXIncrementValue;
             }
@@ -131,8 +151,9 @@ public class MainMapManager : MonoBehaviour
     {
         GenerateBridgePool();
         SpawnMapData();
+        GenerateAllMapData();
+        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
-    [ContextMenu("Generate All Map Data")]
     public void GenerateAllMapData()
     {
         foreach (MapGenerator mapGenerator in mapGeneratorList)
