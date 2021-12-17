@@ -374,13 +374,41 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
-      propertyPath: mapDataToSpawn.Array.size
-      value: 2
+      propertyPath: mainMapMatrixSize
+      value: 21
       objectReference: {fileID: 0}
+    - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
+      propertyPath: mapDataToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
+      propertyPath: mapDataToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 8721036315192447295, guid: c58c447dbded1374a8a83f66ceea0b3e, type: 3}
+    - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
+      propertyPath: mapDataToSpawn.Array.data[2]
+      value: 
+      objectReference: {fileID: 8721036315192447295, guid: c58c447dbded1374a8a83f66ceea0b3e, type: 3}
     - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
       propertyPath: mapDataToSpawn.Array.data[3]
       value: 
-      objectReference: {fileID: 8721036315192447295, guid: 8ded99c880737084f8ca339ce78641d0, type: 3}
+      objectReference: {fileID: 8721036315192447295, guid: c58c447dbded1374a8a83f66ceea0b3e, type: 3}
+    - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
+      propertyPath: mapDataToSpawn.Array.data[4]
+      value: 
+      objectReference: {fileID: 8721036315192447295, guid: 79302db1a9d2a414da62b1eabff797fb, type: 3}
+    - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
+      propertyPath: mapDataToSpawn.Array.data[5]
+      value: 
+      objectReference: {fileID: 8721036315192447295, guid: 79302db1a9d2a414da62b1eabff797fb, type: 3}
+    - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
+      propertyPath: mapDataToSpawn.Array.data[6]
+      value: 
+      objectReference: {fileID: 8721036315192447295, guid: 79302db1a9d2a414da62b1eabff797fb, type: 3}
+    - target: {fileID: 3494061380008809509, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
+      propertyPath: mapDataToSpawn.Array.data[7]
+      value: 
+      objectReference: {fileID: 8721036315192447295, guid: 79302db1a9d2a414da62b1eabff797fb, type: 3}
     - target: {fileID: 7995302662725848589, guid: 3c3ad847a1781ed448aee282cb0d8195, type: 3}
       propertyPath: m_RootOrder
       value: 2
